@@ -2,7 +2,9 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import BalanceCard from './components/BalanceCard';
 import InvestmentCard from './components/InvestmentCard';
+import Mortgage from './components/Mortgage';
 import Spending from './components/Spending';
+import Assets from './components/Assets';
 import Income from './components/Income';
 
 function Dashboard() {
@@ -23,7 +25,7 @@ function Dashboard() {
       
         <TextField
           fullWidth
-          label="Search"
+          label="Ask SunAI for financial advice:"
           variant="outlined"
           onKeyPress={handleSearch}
           sx={{ margin: '1rem' }}
@@ -41,6 +43,12 @@ function Dashboard() {
         </div>
         <div style={{ flexBasis: '45%', marginBottom: '20px' }}>
           <Income />
+        </div>
+        <div style={{ flexBasis: '45%', marginBottom: '20px' }}>
+          <Mortgage />
+        </div>
+        <div style={{ flexBasis: '45%', marginBottom: '20px' }}>
+          <Assets />
         </div>
       </div>
     </div>
