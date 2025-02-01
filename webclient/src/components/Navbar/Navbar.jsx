@@ -57,14 +57,14 @@ const Navbar = () => {
             </Typography>
 
             {/*  User Icon */}
-            <Typography variant="h6" sx={{  marginBottom: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                <Link to ="/profile" style={{ textDecoration: 'none', color: 'white' }}> 
-                    User Profile  
-                  <IconButton color="inherit" component={Link} to="/profile">
-                    <AccountCircleIcon />
-                  </IconButton>
+            <Typography variant="h6" sx={{ marginBottom: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Link to="/profile" style={{ textDecoration: 'none', color: 'white' }}>
+                  User Profile
                 </Link>
-              </Typography>
+                <IconButton color="inherit" component={Link} to="/profile">
+                  <AccountCircleIcon />
+                </IconButton>
+            </Typography>
           </Box>
         </Toolbar>
 
