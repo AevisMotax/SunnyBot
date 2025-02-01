@@ -11,12 +11,14 @@ function Router() {
   return (
     <BrowserRouter>
       <Navbar></Navbar>
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/Dashboard" />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/balance" element={<BalanceCard />} />
-        {/* <Route path="/other" element={<OtherComponent />} /> */}
+      <div> 
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/Dashboard" />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/balance" element={<BalanceCard />} />
+          {/* <Route path="/other" element={<OtherComponent />} /> */}
       </Routes>
+      </div>
     </BrowserRouter>
   );
 }
