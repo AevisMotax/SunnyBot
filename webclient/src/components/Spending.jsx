@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 
-function BalanceCard() {
+function Spending() {
     return (
       <Card sx={{
         minWidth: 275,
@@ -13,10 +13,10 @@ function BalanceCard() {
       }}>
         <CardContent>
           <Typography color="text.secondary" gutterBottom variant="h6">
-            Current Balance
+            Spending
           </Typography>
           <Typography variant="h4" component="div">
-            $25,650
+            $1780 /Month
           </Typography>
         </CardContent>
       </Card>
@@ -24,4 +24,4 @@ function BalanceCard() {
   }
   
 
-export default BalanceCard;
+export default Spending;
