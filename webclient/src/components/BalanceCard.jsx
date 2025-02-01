@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function BalanceCard() {
     return (
@@ -11,6 +12,7 @@ function BalanceCard() {
         margin: '1rem',
         padding: '1rem'
       }}>
+         <Link to="/balance" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
         <CardContent>
           <Typography color="text.secondary" gutterBottom variant="h6">
             Current Balance
@@ -19,6 +21,7 @@ function BalanceCard() {
             $25,650
           </Typography>
         </CardContent>
+        </Link>
       </Card>
     );
   }
