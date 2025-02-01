@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route , Navigate} from 'react-router-dom';
 import Navigation from './Navigation';
 import BalanceCard from './components/BalanceCard'; // Import your BalanceCard component
-// import Dashboard from './components/Dashboard'; // Main dashboard component
+import Dashboard from './Dashboard'; // Main dashboard component
 // import OtherComponent from './components/OtherComponent'; // Other components for different pages
 
 function Router() {
@@ -11,7 +11,8 @@ function Router() {
     <BrowserRouter>
         <Navigation />
       <Routes>
-        {/* <Route path="/" element={<Dashboard />} /> */}
+        <Route path="/" element={<Navigate replace to="/Dashboard" />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/balance" element={<BalanceCard />} />
         {/* <Route path="/other" element={<OtherComponent />} /> */}
       </Routes>
