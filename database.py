@@ -1,5 +1,6 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import json
 
 uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
 
@@ -14,16 +15,18 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 def getUser():
     #access database Finance and collection Users
     mydb = client["Finance"]
-    mycol = mydb["Users"]   
+    usercollection = mydb["Users"]   
 
     #user inputs email and password
     myemail = input("Email: ")
-    password = input("Password: ")
+    mypassword = input ("Password: ")
 
     #checks if username and password is there
-    userinfo = mycol.find_one({"email": myemail})
-    print(myemail)
-    print (userinfo)
+    userinfo = usercollection.find_one({"email": myemail,"password": mypassword})
+    if userinfo == None: 
+        return print("Email and/or passowrd is incorrect.")
+    else:
+        print(userinfo)
 
 
 getUser()
