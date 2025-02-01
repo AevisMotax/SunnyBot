@@ -18,6 +18,20 @@ function BalanceWindow() {
     ],
   };
 
+  // Balance Income Data for the chart
+  const balanceIncomeData = {
+    labels: ["Jan", "Feb", "Mar"], // Months
+    datasets: [
+      {
+        label: "Balance History ($)",
+        data: [26000, 24500, 25500], // Monthly balance values
+        borderColor: "rgba(153, 102, 255, 1)", // Line color
+        backgroundColor: "rgba(153, 102, 255, 0.2)", // Fill color under the line
+        tension: 0.4, // Smooth the line
+      },
+    ],
+  };
+
   const options = {
     responsive: true,
     plugins: {
@@ -34,8 +48,23 @@ function BalanceWindow() {
       alignItems="stretch" // Ensures full width alignment
       sx={{ minHeight: "100vh", padding: 2 }}
     >
-      {/* First Row: Balance and Chart */}
+      {/* First Row: Balance and Charts */}
       <Grid2 container spacing={2} sx={{ width: "100%" }}>
+        {/* Income History Chart */}
+        <Grid2 xs={12} md={6}>
+          <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flexGrow: 1 }}>
+              <Typography color="text.secondary" gutterBottom>
+                Income History
+              </Typography>
+              {/* Render Income History Chart here */}
+              <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Line data={incomeData} options={options} />
+              </div>
+            </CardContent>
+          </Card>
+        </Grid2>
+
         {/* Balance Card */}
         <Grid2 xs={12} md={4}>
           <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
@@ -50,23 +79,23 @@ function BalanceWindow() {
           </Card>
         </Grid2>
 
-        {/* Income History Chart */}
-        <Grid2 xs={12} md={8}>
+        {/* Balance Income Chart */}
+        <Grid2 xs={12} md={6}>
           <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography color="text.secondary" gutterBottom>
-                Income History
+                Balance History
               </Typography>
-              {/* Render Chart here */}
+              {/* Render Balance Income Chart here */}
               <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Line data={incomeData} options={options} />
+                <Line data={balanceIncomeData} options={options} />
               </div>
             </CardContent>
           </Card>
         </Grid2>
       </Grid2>
 
-      {/* Second Row: AI Suggestions */}
+      {/* AI Suggestions */}
       <Grid2 xs={12}>
         <Card sx={{ width: "100%" }}>
           <CardContent>
