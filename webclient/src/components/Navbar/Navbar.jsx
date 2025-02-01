@@ -23,7 +23,6 @@ const Navbar = () => {
           left: 0,
           width:'200px',
           height: '100%',
-          zIndex: 1300,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -59,10 +58,12 @@ const Navbar = () => {
 
             {/*  User Icon */}
             <Typography variant="h6" sx={{  marginBottom: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} >
-                User Profile 
-              <IconButton color="inherit" component={Link} to="/profile">
-                <AccountCircleIcon />
-              </IconButton>
+                <Link to ="/profile" style={{ textDecoration: 'none', color: 'white' }}> 
+                    User Profile  
+                  <IconButton color="inherit" component={Link} to="/profile">
+                    <AccountCircleIcon />
+                  </IconButton>
+                </Link>
               </Typography>
           </Box>
         </Toolbar>
