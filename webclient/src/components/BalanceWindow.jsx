@@ -37,7 +37,7 @@ function BalanceWindow() {
       {/* First Row: Balance and Chart */}
       <Grid2 container spacing={2} sx={{ width: "100%" }}>
         {/* Balance Card */}
-        <Grid2 item xs={12} md={4}>
+        <Grid2 xs={12} md={4}>
           <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
             <CardContent>
               <Typography color="text.secondary" gutterBottom>
@@ -51,7 +51,7 @@ function BalanceWindow() {
         </Grid2>
 
         {/* Income History Chart */}
-        <Grid2 item xs={12} md={8}>
+        <Grid2 xs={12} md={8}>
           <Card sx={{ height: "100%", width: "100%", display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography color="text.secondary" gutterBottom>
@@ -67,7 +67,7 @@ function BalanceWindow() {
       </Grid2>
 
       {/* Second Row: AI Suggestions */}
-      <Grid2 item xs={12}>
+      <Grid2 xs={12}>
         <Card sx={{ width: "100%" }}>
           <CardContent>
             <Typography color="text.secondary" gutterBottom>
