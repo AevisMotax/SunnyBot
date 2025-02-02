@@ -17,7 +17,6 @@ const Navbar = () => {
   return (
     <>
       <AppBar
-        position="fixed"
         sx={{
           top: 0,
           left: 0,

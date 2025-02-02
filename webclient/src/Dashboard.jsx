@@ -20,7 +20,7 @@ function Dashboard() {
 
     return (
         
-    <div style={{ paddingLeft: '200px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+    <div style={{ }}>
         {/* Your existing components */}
       
         <TextField
