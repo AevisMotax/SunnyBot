@@ -43,6 +43,7 @@ function BalanceWindow() {
     datasets: [{ label: "", data: [], borderColor: "", backgroundColor: "" }],
   });
   const [currentBalance, setCurrentBalance] = useState(0);
+  const [chatbotPrompts, setChatbotPrompts] = useState("Hi, I am SunnyBot, a bot for you!");
 
   // Fetch income data from backend
   useEffect(() => {
@@ -108,6 +109,20 @@ function BalanceWindow() {
     };
 
     fetchCurrentBalance();
+  }, []);
+
+  useEffect(() => {
+    const fetchChatbotPrompts = async () => {
+      try {
+        const data = await getChatbotPrompts();
+        setChatbotPrompts(data.prompts); // Assuming API returns { prompts: ["Tip 1", "Tip 2", ...] }
+      } catch (error) {
+        console.error("Error fetching chatbot prompts:", error);
+        setChatbotPrompts("Error generating response data. Please retry again");
+      }
+    };
+  
+    fetchChatbotPrompts();
   }, []);
 
   const options = {
@@ -180,9 +195,13 @@ function BalanceWindow() {
             <Typography color="text.secondary" gutterBottom>
               AI Suggestions
             </Typography>
-            <Typography variant="body2">- Maximize savings with automated budgeting</Typography>
+
+              <Typography>
+                {chatbotPrompts}
+              </Typography>
+            {/* <Typography variant="body2">- Maximize savings with automated budgeting</Typography>
             <Typography variant="body2">- Invest in high-yield savings plans</Typography>
-            <Typography variant="body2">- Use AI to track and predict spending trends</Typography>
+            <Typography variant="body2">- Use AI to track and predict spending trends</Typography> */}
           </CardContent>
         </Card>
       </Grid2>
