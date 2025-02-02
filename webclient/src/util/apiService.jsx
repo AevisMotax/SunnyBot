@@ -6,7 +6,7 @@ export const getIncomeData = async () => {
 };
   
   export const getBalanceIncomeData = async () => {
-    return queryManager('GET', '/balance-history');
+    return queryManager('GET', '/database/balance-history');
   };
   
   export const getCurrentBalance = async () => {
