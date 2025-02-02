@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import { Grid2 } from "@mui/material";
 import { Line } from "../chartJsSetup";
-import { getIncomeData, getBalanceIncomeData, getCurrentBalance }  from "../util/apiService"; 
+import { getIncomeData, getBalanceIncomeData, getCurrentBalance, getChatBalanceWindow }  from "../util/apiService";
 
 
 function BalanceWindow() {
@@ -114,8 +114,8 @@ function BalanceWindow() {
   useEffect(() => {
     const fetchChatbotPrompts = async () => {
       try {
-        const data = await getChatbotPrompts();
-        setChatbotPrompts(data.prompts); // Assuming API returns { prompts: ["Tip 1", "Tip 2", ...] }
+        const data = await getChatBalanceWindow();
+        setChatbotPrompts(data.message); // Assuming API returns { prompts: ["Tip 1", "Tip 2", ...] }
       } catch (error) {
         console.error("Error fetching chatbot prompts:", error);
         setChatbotPrompts("Error generating response data. Please retry again");
