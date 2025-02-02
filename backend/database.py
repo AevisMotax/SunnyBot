@@ -43,7 +43,17 @@ def QueryBalance():
         return {"balance": userinfo['Balance']}
     else: 
         return None
+    
 
+@app.get("/balance-history")
+def QueryBalanceHistory():
+    print(userinfo['BalanceHistory'])
+    if userinfo:
+        return {"BalanceHistory": userinfo['BalanceHistory']}
+    else: 
+        return None
+
+#QueryBalanceHistory(myemail,mypassword)
 #QueryUserInfo(myemail,mypassword)
 #QueryID(myemail,mypassword)
 #QueryBalance(myemail,mypassword)
