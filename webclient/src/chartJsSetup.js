@@ -1,3 +1,5 @@
+//Main file to just export every stuff from Chart-JS, such that we don't need to write every imports
+//We just imporr this file --much faster, but tedious
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
