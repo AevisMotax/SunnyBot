@@ -1,18 +1,10 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
 uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:5174"],  # Allow all origins (or replace "" with your frontend URL)
-    allow_credentials=True,
-    allow_methods=[""],  # Allow all methods (GET, POST, etc.)
-    allow_headers=[""],  # Allow all headers
-)
+app1_router = APIRouter()
 
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -43,7 +35,7 @@ def QueryID(myemail,mypassword):
     else: 
         return None
 
-@app.get("/current-balance")
+@app1_router.get("/current-balance")
 #def QueryBalance(myemail,mypassword):
 def QueryBalance():
     print(userinfo['Balance'])

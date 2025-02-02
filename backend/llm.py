@@ -1,10 +1,10 @@
 import asyncio
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from ollama import AsyncClient
 import database
 
 user = database.QueryUserInfo(database.myemail, database.mypassword)
-app = FastAPI()
+app2_router = APIRouter()
 
 async def base_chat(prompt):
     message = {'role': 'user', 'content': f'{prompt}: {user}'}
@@ -14,7 +14,7 @@ async def base_chat(prompt):
         final_message += part['message']['content']
     return {'message': final_message}
 
-@app.get('/chat')
+@app2_router.get('/chat')
 async def chat():
     return await base_chat("Please write a financial summary of the following person")
 
