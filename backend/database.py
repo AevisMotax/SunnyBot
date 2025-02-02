@@ -1,34 +1,42 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
 
-def getUser():
-    uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
 
-    # Create a new client and connect to the server
-    client = MongoClient(uri, server_api=ServerApi('1'))
+#access database Finance and collection Users
+mydb = client["Finance"]
+usercollection = mydb["Users"]   
 
-    # Send a ping to confirm a successful connection
-    try:
-        client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
-    except Exception as e:
-        print(e)
+#user inputs email and password
+myemail = input("Email: ")
+mypassword = input ("Password: ")
+userinfo = usercollection.find_one({"email": myemail,"password": mypassword})
 
-    mydb = client["Finance"]
-    mycol = mydb["Users"]
 
-    #for x in mycol.find():
-    #    print(x)
+def QueryUserInfo(myemail,mypassword):
+    #checks if username and password is there
+    #userinfo = usercollection.find_one({"email": myemail,"password": mypassword})
+    if userinfo == None: 
+       return print("Email and/or passowrd is incorrect.")
+    else:
+       print(userinfo)
 
-    myquery = {"FirstName": "Julian"}
+def QueryID(myemail,mypassword):
+    #userinfo = usercollection.find_one({"email": myemail})
+    if userinfo:
+        return print(userinfo['_id'])
+    else: 
+        return None
+    
+def QueryBalance(myemail,mypassword):
+    if userinfo:
+        return print(userinfo['Balance'])
+    else: 
+        return None
 
-    mydoc = mycol.find(myquery)
-    #print(mydoc)
-    user = list(mydoc)
-    #print(user)
-    for x in mydoc:
-        print(x)
-    return user
-
-#print(getUser())
+#QueryUserInfo(myemail,mypassword)
+#QueryID(myemail,mypassword)
+QueryBalance(myemail,mypassword)
