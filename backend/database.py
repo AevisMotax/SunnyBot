@@ -61,7 +61,7 @@ def QueryBalanceHistory():
     else: 
         return None
 
-QueryBalanceHistory(myemail,mypassword)
+#QueryBalanceHistory(myemail,mypassword)
 #QueryUserInfo(myemail,mypassword)
 #QueryID(myemail,mypassword)
 #QueryBalance(myemail,mypassword)
