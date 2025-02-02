@@ -14,9 +14,9 @@ async def base_chat(prompt):
         final_message += part['message']['content']
     return {'message': final_message}
 
-@app2_router.get('/chat')
+@app2_router.get('/balance-chat')
 async def chat():
-    return await base_chat("Please write a financial summary of the following person")
+    return await base_chat("Please give advice to this person consider only their balance and any balance history: ")
 
 #asyncio.run(chat())
 

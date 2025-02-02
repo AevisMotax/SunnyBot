@@ -24,3 +24,7 @@ export const getIncomeData = async () => {
   export const deleteTransaction = async (transactionId) => {
     return queryManager('DELETE', `/delete-transaction/${transactionId}`);
   };
+
+  export const balanceAdvice = async () => {
+    return queryManager('GET', '/llm/balance-chat');
+  };
