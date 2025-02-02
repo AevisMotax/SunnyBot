@@ -4,7 +4,7 @@ import BalanceCard from './components/BalanceCard';
 import InvestmentCard from './components/InvestmentCard';
 import Mortgage from './components/Mortgage';
 import Spending from './components/Spending';
-import Assets from './components/Assets';
+import Assets from './components/AssetsCard';
 import Income from './components/Income';
 
 function Dashboard() {
