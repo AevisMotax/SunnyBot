@@ -1,5 +1,11 @@
 import queryManager from "./querymanager";
 
+
+//chat prompts for DeepSeeks AI
+export const getChatBalanceWindow = async () => {
+  return queryManager('GET', '/llm/balance-chat');
+};
+
 // Specific API calls using queryManager
 export const getIncomeData = async () => {
     return queryManager('GET', '/income-history');
