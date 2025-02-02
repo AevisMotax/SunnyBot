@@ -50,19 +50,19 @@ function BalanceWindow() {
     const fetchIncomeData = async () => {
       try {
         const data = await getIncomeData();
-        // Assuming the data returned has a structure { labels: [...], values: [...] }
-        setIncomeData({
-          labels: data.labels,
-          datasets: [
-            {
-              label: "Income History ($)",
-              data: data.values,
-              borderColor: "rgba(75, 192, 192, 1)",
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              tension: 0.4,
-            },
-          ],
+
+        data.IncomeHistory.forEach((element) => {
+          setBalanceIncomeData((prevData) => ({
+            labels: [...prevData.labels, element.InputDate], // Add new label
+            datasets: [
+              {
+                ...prevData.datasets[0], // Copy the existing dataset
+                data: [...prevData.datasets[0].data, element.Income], // Add new data
+              },
+            ],
+          }));
         });
+
       } catch (error) {
         console.error("Error fetching income data:", error);
       }
@@ -76,18 +76,17 @@ function BalanceWindow() {
     const fetchBalanceIncomeData = async () => {
       try {
         const data = await getBalanceIncomeData();
-        // Assuming the data returned has a structure { labels: [...], values: [...] }
-        setBalanceIncomeData({
-          labels: data.labels,
-          datasets: [
-            {
-              label: "Balance History ($)",
-              data: data.values,
-              borderColor: "rgba(153, 102, 255, 1)",
-              backgroundColor: "rgba(153, 102, 255, 0.2)",
-              tension: 0.4,
-            },
-          ],
+
+        data.BalanceHistory.forEach((element) => {
+          setBalanceIncomeData((prevData) => ({
+            labels: [...prevData.labels, element.InputDate], // Add new label
+            datasets: [
+              {
+                ...prevData.datasets[0], // Copy the existing dataset
+                data: [...prevData.datasets[0].data, element.Income], // Add new data
+              },
+            ],
+          }));
         });
       } catch (error) {
         console.error("Error fetching balance income data:", error);

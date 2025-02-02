@@ -12,7 +12,7 @@ export const getIncomeData = async () => {
 };
   
   export const getBalanceIncomeData = async () => {
-    return queryManager('GET', '/balance-history');
+    return queryManager('GET', '/database/balance-history');
   };
   
   export const getCurrentBalance = async () => {
@@ -29,4 +29,8 @@ export const getIncomeData = async () => {
   
   export const deleteTransaction = async (transactionId) => {
     return queryManager('DELETE', `/delete-transaction/${transactionId}`);
+  };
+
+  export const balanceAdvice = async () => {
+    return queryManager('GET', '/llm/balance-chat');
   };
