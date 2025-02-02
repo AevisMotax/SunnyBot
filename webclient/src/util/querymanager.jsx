@@ -35,4 +35,16 @@ const queryManager = async (type, endpoint, data = {}, config = {}) => {
   }
 };
 
+// Exported functions for different HTTP methods
+export const apiService = {
+    get: (endpoint, config) => queryManager('GET', endpoint, {}, config),
+    post: (endpoint, data, config) => queryManager('POST', endpoint, data, config),
+    put: (endpoint, data, config) => queryManager('PUT', endpoint, data, config),
+    delete: (endpoint, config) => queryManager('DELETE', endpoint, {}, config),
+};
+
+
 export default queryManager;
+
+
+  
