@@ -101,7 +101,7 @@ function BalanceWindow() {
     const fetchCurrentBalance = async () => {
       try {
         const balance = await getCurrentBalance();
-        setCurrentBalance(balance); // Assuming the backend returns a single balance value
+        setCurrentBalance(balance.balance); // Assuming the backend returns a single balance value
       } catch (error) {
         console.error("Error fetching current balance:", error);
       }
