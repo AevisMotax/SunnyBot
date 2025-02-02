@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from ollama import AsyncClient
 import database
 
-user = database.QueryUserInfo()
+user = database.QueryUserInfo(database.myemail, database.mypassword)
 app = FastAPI()
 
 async def base_chat(prompt):

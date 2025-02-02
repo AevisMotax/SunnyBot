@@ -23,6 +23,7 @@ def QueryUserInfo(myemail,mypassword):
        return print("Email and/or passowrd is incorrect.")
     else:
        print(userinfo)
+       return userinfo
 
 def QueryID(myemail,mypassword):
     #userinfo = usercollection.find_one({"email": myemail})

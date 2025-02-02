@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Provider } from 'react-redux'
-import { ApiProvider } from './Context/APiContext'
+import { ApiProvider } from './Context/ApiContext'
 import store from './store/store'
 import Router from './Router'
 import './App.css'
