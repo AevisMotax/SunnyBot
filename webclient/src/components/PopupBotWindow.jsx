@@ -3,6 +3,7 @@ import { TextField, Button, Box, Typography } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import Loader from "./loader";
 import { getChatDashBoardWindow } from "../util/apiService";
+import axios from "axios";
 
 export default function PopupBotWindow({ searchQuery, onClose }) {
     const [messages, setMessages] = useState([{}]);
@@ -18,14 +19,34 @@ export default function PopupBotWindow({ searchQuery, onClose }) {
 
     //Chatbot backend should return some messages
     try {
-        const response = await getChatDashBoardWindow(userInput);
+        // Prepare the payload for the POST request
+        const data = {
+            "message": userInput,
+        };
+
+        const sendPost = {
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data), // Send user input as message payload
+        }
+
+        // Send the POST request using axios
+        const response = await axios.post('http://127.0.0.1:8000/llm/financial-chat', data, {
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
         //return data in here
-        setMessages([...newMessages, { sender: "SunnyBot", text: response.data.message }]); 
-    
+        setMessages([...newMessages, { sender: "SunnyBot", text: response.data.message }]);
+
     } catch(error) {
 
         console.error("API ERROR: ", error)
-        setMessages([...newMessages, { sender: "SunnyBot", text: "Unable to answer you, please retry later." }]); 
+        setMessages([...newMessages, { sender: "SunnyBot", text: "Unable to answer you, please retry later." }]);
     }
 
       setUserInput("");
@@ -43,20 +64,20 @@ export default function PopupBotWindow({ searchQuery, onClose }) {
                     Sunny Bot Chat
                 </Typography>
 
-                <Button 
-                    variant="text" 
-                    color="secondary" 
-                    onClick={onClose} 
-                    sx={{ 
+                <Button
+                    variant="text"
+                    color="secondary"
+                    onClick={onClose}
+                    sx={{
                         justifyContent: "right",
-                        fontSize: "24px", 
+                        fontSize: "24px",
                     }}
                 >
                     &times;
                 </Button>
             </Box>
 
-            
+
             {/* TextBox chat input for all info */}
 
             <Box sx={{ flexGrow: 1, overflowY: "auto", border: "1px solid #ccc", p: 2, borderRadius: "8px" }}>
@@ -104,8 +125,8 @@ export default function PopupBotWindow({ searchQuery, onClose }) {
                     <SendIcon />
                 </Button>
             </Box>
-            
-            
+
+
         </Box>
     );
 }
