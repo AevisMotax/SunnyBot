@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 function InvestmentCard() {
   return (
     <Card sx={{
@@ -11,6 +11,7 @@ function InvestmentCard() {
       margin: '1rem',
       padding: '1rem'
     }}>
+      <Link to="/investment" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
       <CardContent>
         <Typography color="text.secondary" gutterBottom variant="h6">
           Investment
@@ -24,6 +25,7 @@ function InvestmentCard() {
           </Typography>
         </Box>
       </CardContent>
+      </Link>
     </Card>
   );
 }

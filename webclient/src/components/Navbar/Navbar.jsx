@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';  // Import MenuIcon
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'; // For the popup button
-import SunLifeLogo from '../../assets/sunlife.png'; // Make sure to add the logo to the 'assets' folder or wherever you store your images
+import SunLifeLogo from '../../assets/sunAILogo.webp'; // Make sure to add the logo to the 'assets' folder or wherever you store your images
 
 const Navbar = () => {
   const [openNavbar, setOpenNavbar] = useState(true);
@@ -17,6 +17,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar
+        position="fixed"
         sx={{
           top: 0,
           left: 0,
@@ -40,7 +41,7 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <img src={SunLifeLogo} alt="Sun Life Logo" style={{ width: "100%", height: '50%' }} />
+            <img src={SunLifeLogo} alt="Sun Life Logo" style={{ width: "115%", height: '50%' }} />
           </Box>
 
           {/* Navigation Links */}
