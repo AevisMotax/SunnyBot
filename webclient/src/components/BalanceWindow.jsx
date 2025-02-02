@@ -3,22 +3,22 @@ import { Card, CardContent, Typography } from "@mui/material";
 import { Grid2 } from "@mui/material";
 import { Line } from "../chartJsSetup";
 import { getIncomeData, getBalanceIncomeData, getCurrentBalance, getChatBalanceWindow }  from "../util/apiService";
-
+import Loader from "./loader";
 
 function BalanceWindow() {
   // Income History Data for the chart
-  // const incomeData = {
-  //   labels: ["Jan", "Feb", "Mar"], // Months
-  //   datasets: [
-  //     {
-  //       label: "Income History ($)",
-  //       data: [3000, 2500, 3200], // Monthly income values
-  //       borderColor: "rgba(75, 192, 192, 1)", // Line color
-  //       backgroundColor: "rgba(75, 192, 192, 0.2)", // Fill color under the line
-  //       tension: 0.4, // Smooth the line
-  //     },
-  //   ],
-  // };
+  const incomeData = {
+    labels: ["Jan", "Feb", "Mar"], // Months
+    datasets: [
+      {
+        label: "Income History ($)",
+        data: [3000, 2500, 3200], // Monthly income values
+        borderColor: "rgba(75, 192, 192, 1)", // Line color
+        backgroundColor: "rgba(75, 192, 192, 0.2)", // Fill color under the line
+        tension: 0.4, // Smooth the line
+      },
+    ],
+  };
 
   // // Balance Income Data for the chart
   // const balanceIncomeData = {
@@ -34,42 +34,14 @@ function BalanceWindow() {
   //   ],
   // };
 
-  const [incomeData, setIncomeData] = useState({
-    labels: [],
-    datasets: [{ label: "", data: [], borderColor: "", backgroundColor: "" }],
-  });
   const [balanceIncomeData, setBalanceIncomeData] = useState({
     labels: [],
     datasets: [{ label: "", data: [], borderColor: "", backgroundColor: "" }],
   });
   const [currentBalance, setCurrentBalance] = useState(0);
   const [chatbotPrompts, setChatbotPrompts] = useState("Hi, I am SunnyBot, a bot for you!");
+  const [loader, setLoader] = useState(true);
 
-  // Fetch income data from backend
-  useEffect(() => {
-    const fetchIncomeData = async () => {
-      try {
-        const data = await getIncomeData();
-
-        data.IncomeHistory.forEach((element) => {
-          setBalanceIncomeData((prevData) => ({
-            labels: [...prevData.labels, element.InputDate], // Add new label
-            datasets: [
-              {
-                ...prevData.datasets[0], // Copy the existing dataset
-                data: [...prevData.datasets[0].data, element.Income], // Add new data
-              },
-            ],
-          }));
-        });
-
-      } catch (error) {
-        console.error("Error fetching income data:", error);
-      }
-    };
-
-    fetchIncomeData();
-  }, []);
 
   // Fetch balance income data from backend
   useEffect(() => {
@@ -114,13 +86,15 @@ function BalanceWindow() {
     const fetchChatbotPrompts = async () => {
       try {
         const data = await getChatBalanceWindow();
-        setChatbotPrompts(data.message); // Assuming API returns { prompts: ["Tip 1", "Tip 2", ...] }
+        setChatbotPrompts(data.message); 
+        setLoader(false);
       } catch (error) {
         console.error("Error fetching chatbot prompts:", error);
         setChatbotPrompts("Error generating response data. Please retry again");
+        setLoader(false);
       }
     };
-  
+    
     fetchChatbotPrompts();
   }, []);
 
@@ -140,6 +114,7 @@ function BalanceWindow() {
       alignItems="stretch" // Ensures full width alignment
       sx={{ minHeight: "100vh", padding: 2 }}
     >
+      <>
       {/* First Row: Balance and Charts */}
       <Grid2 container spacing={2} sx={{ width: "100%" }}>
         {/* Income History Chart */}
@@ -186,6 +161,7 @@ function BalanceWindow() {
           </Card>
         </Grid2>
       </Grid2>
+      </>
 
       {/* AI Suggestions */}
       <Grid2 xs={12}>
@@ -194,10 +170,14 @@ function BalanceWindow() {
             <Typography color="text.secondary" gutterBottom>
               AI Suggestions
             </Typography>
-
-              <Typography>
-                {chatbotPrompts}
-              </Typography>
+              
+              {loader ?                 
+                < Loader></Loader>
+                :
+                <Typography>
+                  {chatbotPrompts}
+                </Typography>
+              }
             {/* <Typography variant="body2">- Maximize savings with automated budgeting</Typography>
             <Typography variant="body2">- Invest in high-yield savings plans</Typography>
             <Typography variant="body2">- Use AI to track and predict spending trends</Typography> */}
