@@ -45,7 +45,7 @@ def QueryBalance():
         return None
     
 
-@app.get("/balance-history")
+@app1_router.get("/balance-history")
 def QueryBalanceHistory():
     print(userinfo['BalanceHistory'])
     if userinfo:
