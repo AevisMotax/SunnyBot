@@ -1,5 +1,18 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
+uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[""],  # Allow all origins (or replace "" with your frontend URL)
+    allow_credentials=True,
+    allow_methods=[""],  # Allow all methods (GET, POST, etc.)
+    allow_headers=[""],  # Allow all headers
+)
 
 uri = "mongodb+srv://conuhacksunlife:conuhacks2025@financesunlife.pmyry.mongodb.net/?retryWrites=true&w=majority&appName=financeSunlife"
 
@@ -31,13 +44,16 @@ def QueryID(myemail,mypassword):
         return print(userinfo['_id'])
     else: 
         return None
-    
-def QueryBalance(myemail,mypassword):
+
+@app.get("/balance-history")
+#def QueryBalance(myemail,mypassword):
+def QueryBalance():
+    print(userinfo['Balance'])
     if userinfo:
-        return print(userinfo['Balance'])
+        return {"balance": userinfo['Balance']}
     else: 
         return None
 
 #QueryUserInfo(myemail,mypassword)
 #QueryID(myemail,mypassword)
-QueryBalance(myemail,mypassword)
+#QueryBalance(myemail,mypassword)

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for the backend API
-const BASE_URL = 'https://api.example.com'; // Replace with your actual backend URL
+const BASE_URL = 'http://127.0.0.1:8000'; // Replace with your actual backend URL
 
 // QueryManager - A utility to manage all API requests
 const queryManager = async (type, endpoint, data = {}, config = {}) => {
