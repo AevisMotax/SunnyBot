@@ -6,6 +6,11 @@ export const getChatBalanceWindow = async () => {
   return queryManager('GET', '/llm/balance-chat');
 };
 
+//chat prompts for DeepSeeks AI -- Dashboard
+export const getChatDashBoardWindow = async (data) => {
+  return queryManager('POST', '/llm/dashboard-chat', data);
+};
+
 // Specific API calls using queryManager
 export const getIncomeData = async () => {
     return queryManager('GET', '/income-history');
