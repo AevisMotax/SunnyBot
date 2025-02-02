@@ -1,36 +1,114 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import { Grid2 } from "@mui/material";
 import { Line } from "../chartJsSetup";
+import { getIncomeData, getBalanceIncomeData, getCurrentBalance }  from "../util/apiService"; 
+
 
 function BalanceWindow() {
   // Income History Data for the chart
-  const incomeData = {
-    labels: ["Jan", "Feb", "Mar"], // Months
-    datasets: [
-      {
-        label: "Income History ($)",
-        data: [3000, 2500, 3200], // Monthly income values
-        borderColor: "rgba(75, 192, 192, 1)", // Line color
-        backgroundColor: "rgba(75, 192, 192, 0.2)", // Fill color under the line
-        tension: 0.4, // Smooth the line
-      },
-    ],
-  };
+  // const incomeData = {
+  //   labels: ["Jan", "Feb", "Mar"], // Months
+  //   datasets: [
+  //     {
+  //       label: "Income History ($)",
+  //       data: [3000, 2500, 3200], // Monthly income values
+  //       borderColor: "rgba(75, 192, 192, 1)", // Line color
+  //       backgroundColor: "rgba(75, 192, 192, 0.2)", // Fill color under the line
+  //       tension: 0.4, // Smooth the line
+  //     },
+  //   ],
+  // };
 
-  // Balance Income Data for the chart
-  const balanceIncomeData = {
-    labels: ["Jan", "Feb", "Mar"], // Months
-    datasets: [
-      {
-        label: "Balance History ($)",
-        data: [26000, 24500, 25500], // Monthly balance values
-        borderColor: "rgba(153, 102, 255, 1)", // Line color
-        backgroundColor: "rgba(153, 102, 255, 0.2)", // Fill color under the line
-        tension: 0.4, // Smooth the line
-      },
-    ],
-  };
+  // // Balance Income Data for the chart
+  // const balanceIncomeData = {
+  //   labels: ["Jan", "Feb", "Mar"], // Months
+  //   datasets: [
+  //     {
+  //       label: "Balance History ($)",
+  //       data: [26000, 24500, 25500], // Monthly balance values
+  //       borderColor: "rgba(153, 102, 255, 1)", // Line color
+  //       backgroundColor: "rgba(153, 102, 255, 0.2)", // Fill color under the line
+  //       tension: 0.4, // Smooth the line
+  //     },
+  //   ],
+  // };
+
+  const [incomeData, setIncomeData] = useState({
+    labels: [],
+    datasets: [{ label: "", data: [], borderColor: "", backgroundColor: "" }],
+  });
+  const [balanceIncomeData, setBalanceIncomeData] = useState({
+    labels: [],
+    datasets: [{ label: "", data: [], borderColor: "", backgroundColor: "" }],
+  });
+  const [currentBalance, setCurrentBalance] = useState(0);
+
+  // Fetch income data from backend
+  useEffect(() => {
+    const fetchIncomeData = async () => {
+      try {
+        const data = await getIncomeData();
+        // Assuming the data returned has a structure { labels: [...], values: [...] }
+        setIncomeData({
+          labels: data.labels,
+          datasets: [
+            {
+              label: "Income History ($)",
+              data: data.values,
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              tension: 0.4,
+            },
+          ],
+        });
+      } catch (error) {
+        console.error("Error fetching income data:", error);
+      }
+    };
+
+    fetchIncomeData();
+  }, []);
+
+  // Fetch balance income data from backend
+  useEffect(() => {
+    const fetchBalanceIncomeData = async () => {
+      try {
+        const data = await getBalanceIncomeData();
+        // Assuming the data returned has a structure { labels: [...], values: [...] }
+        setBalanceIncomeData({
+          labels: data.labels,
+          datasets: [
+            {
+              label: "Balance History ($)",
+              data: data.values,
+              borderColor: "rgba(153, 102, 255, 1)",
+              backgroundColor: "rgba(153, 102, 255, 0.2)",
+              tension: 0.4,
+            },
+          ],
+        });
+      } catch (error) {
+        console.error("Error fetching balance income data:", error);
+      }
+    };
+
+    fetchBalanceIncomeData();
+  }, []);
+
+  // Fetch current balance from backend
+  useEffect(() => {
+    const fetchCurrentBalance = async () => {
+      try {
+        const balance = await getCurrentBalance();
+        setCurrentBalance(balance); // Assuming the backend returns a single balance value
+      } catch (error) {
+        console.error("Error fetching current balance:", error);
+      }
+    };
+
+    fetchCurrentBalance();
+  }, []);
 
   const options = {
     responsive: true,
@@ -73,7 +151,7 @@ function BalanceWindow() {
                 Current Balance
               </Typography>
               <Typography variant="h5" component="div">
-                $25,650
+                ${currentBalance}
               </Typography>
             </CardContent>
           </Card>
