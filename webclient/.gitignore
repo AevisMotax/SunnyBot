@@ -17,6 +17,17 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+.next
+/.env
+/public
+__pycache__
+.vercel
+.turbo
+.eslintcache
+turbo-cache-key.json
+junit.xml
+
 *.suo
 *.ntvs*
 *.njsproj
